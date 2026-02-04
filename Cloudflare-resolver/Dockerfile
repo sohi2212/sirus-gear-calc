@@ -11,19 +11,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Прогрев Camoufox
-RUN python - <<EOF
-from camoufox.async_api import AsyncCamoufox
-import asyncio
-
-async def main():
-    c = AsyncCamoufox(headless=True)
-    await c.start()
-    await c.stop()
-
-asyncio.run(main())
-EOF
-
 COPY app ./app
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
