@@ -1,8 +1,11 @@
-version: "3.9"
-
 services:
   cloudflare-resolver:
     build: .
     ports:
       - "9000:8000"
+    volumes:
+      - camoufox-cache:/root/.cache/camoufox
     restart: unless-stopped
+
+volumes:
+  camoufox-cache:
